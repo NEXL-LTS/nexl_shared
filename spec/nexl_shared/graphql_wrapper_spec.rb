@@ -1,10 +1,11 @@
 module NexlShared
   RSpec.describe GraphqlWrapper do
+    subject { described_class.new(app_schema, logger: logger, error_tracker: error_tracker) }
+
     let(:app_schema) { class_double(GraphQL::Schema, execute: {}) }
     let(:logger) { Logger.new(StringIO.new) }
     let(:error_tracker) { class_double(ErrorTracker, error: true) }
 
-    subject { described_class.new(app_schema, logger: logger, error_tracker: error_tracker) }
 
     def execute(**args)
       subject.execute(**args)

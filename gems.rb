@@ -10,3 +10,9 @@ gem 'rubocop-rails'
 gem 'rubocop-rake'
 gem 'rubocop-rspec'
 gem "simplecov", ">= 0.18.5"
+
+if ENV['USE_RAILS_6_0'] == 'true'
+  gem 'actionpack', "~> 6.0.0"
+  gem 'activerecord', "~> 6.0.0"
+  gem 'activesupport', "~> 6.0.0"
+end
