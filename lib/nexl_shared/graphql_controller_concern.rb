@@ -1,3 +1,5 @@
+require 'rack/timeout/core'
+
 module NexlShared
   module GraphqlControllerConcern
     extend ActiveSupport::Concern
@@ -6,7 +8,8 @@ module NexlShared
       protect_from_forgery unless: -> { request.format.json? }
       rescue_from RuntimeError,
                   ActionController::ActionControllerError,
-                  ActiveRecord::ActiveRecordError do |error|
+                  ActiveRecord::ActiveRecordError,
+                  Rack::Timeout::RequestTimeoutException do
         ErrorTracker.error(error)
         render json: { errors: [{ message: error.message }] }
       end

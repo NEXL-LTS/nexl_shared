@@ -24,5 +24,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'activerecord', '~> 6.0'
   spec.add_dependency 'activesupport', '~> 6.0'
   spec.add_dependency 'graphql', '>= 1.9.4'
+  spec.add_dependency 'rack-timeout', '>= 0.6.0'
   spec.add_dependency 'rollbar', '>= 2.18.2'
 end
