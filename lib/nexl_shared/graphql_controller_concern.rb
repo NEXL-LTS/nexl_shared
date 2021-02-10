@@ -9,7 +9,7 @@ module NexlShared
       rescue_from RuntimeError,
                   ActionController::ActionControllerError,
                   ActiveRecord::ActiveRecordError,
-                  Rack::Timeout::RequestTimeoutException do
+                  Rack::Timeout::RequestTimeoutException do |error|
         ErrorTracker.error(error)
         render json: { errors: [{ message: error.message }] }
       end
