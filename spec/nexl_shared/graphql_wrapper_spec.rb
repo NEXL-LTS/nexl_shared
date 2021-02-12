@@ -1,6 +1,9 @@
 module NexlShared
   RSpec.describe GraphqlWrapper do
-    subject { described_class.new(app_schema, logger: logger, error_tracker: error_tracker) }
+    subject do
+      described_class.new(app_schema, logger: logger, error_tracker: error_tracker,
+                                      re_raise_errors: true)
+    end
 
     let(:app_schema) { class_double(GraphQL::Schema, execute: {}) }
     let(:logger) { Logger.new(StringIO.new) }
@@ -12,11 +15,12 @@ module NexlShared
     end
 
     it 'generates error for unknown field' do
-      allow(app_schema).to receive(:execute).
-        and_return({ 'errors' => [{ 'message' => "doesn't exist on type" }] })
+      error_result = { 'errors' => [{ 'message' => "doesn't exist on type" }] }
+      allow(app_schema).to receive(:execute).and_return(error_result)
 
-      execute(query: "blah")
-      expect(app_schema).to have_received(:execute).with("blah", variables: {})
+      expect(execute(query: "blah")).to eq(error_result)
+      expect(app_schema).to have_received(:execute).
+        with("blah", { :context => nil, :operation_name => nil, :variables => {} })
       expect(error_tracker).to have_received(:error).
         with(kind_of(GraphqlWrapper::UndefinedField), { :query => "blah" })
     end
@@ -26,7 +30,6 @@ module NexlShared
         and_return({ 'errors' => [{ 'message' => "missing required arguments" }] })
 
       execute(query: "blah")
-      expect(app_schema).to have_received(:execute).with("blah", variables: {})
       expect(error_tracker).to have_received(:error).
         with(kind_of(GraphqlWrapper::MissingRequiredArguments), { :query => "blah" })
     end
@@ -36,7 +39,6 @@ module NexlShared
         and_return({ 'errors' => [{ 'message' => "Expected type" }] })
 
       execute(query: "blah")
-      expect(app_schema).to have_received(:execute).with("blah", variables: {})
       expect(error_tracker).to have_received(:error).
         with(kind_of(GraphqlWrapper::ArgumentLiteralsIncompatible), { :query => "blah" })
     end
@@ -46,7 +48,6 @@ module NexlShared
         and_return({ 'errors' => [{ 'message' => "required when multiple operations" }] })
 
       execute(query: "blah")
-      expect(app_schema).to have_received(:execute).with("blah", variables: {})
       expect(error_tracker).to have_received(:error).
         with(kind_of(GraphqlWrapper::UniquelyNamedOperations), { :query => "blah" })
     end

@@ -22,6 +22,7 @@ module NexlShared
     def execute
       rename_transaction_name
       render json: GraphqlWrapper.execute(app_schema,
+                                          show_error: show_error,
                                           logger: logger,
                                           variables: params[:variables],
                                           query: params[:query],
@@ -37,6 +38,10 @@ module NexlShared
 
       def logger
         Rails.logger
+      end
+
+      def show_error
+        !Rails.env.production?
       end
 
       def rename_transaction_name
