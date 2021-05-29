@@ -10,6 +10,7 @@ module NexlShared
                   ActionController::ActionControllerError,
                   ActiveRecord::ActiveRecordError,
                   Rack::Timeout::RequestTimeoutException do |error|
+        Rails.logger.error(error)
         ErrorTracker.error(error)
         render json: { errors: [{ message: error.message }] }
       end
