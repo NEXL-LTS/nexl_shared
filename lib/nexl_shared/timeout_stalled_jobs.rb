@@ -12,13 +12,19 @@ module NexlShared
       around_perform :timeout_stalled_jobs
     end
 
-    def timeout_stalled_jobs(&)
-      start_time = Time.current
-      Timeout.timeout(stall_time, &)
-    rescue Timeout::Error => e
-      raise StalledJobError, e.message if Time.current - start_time >= stall_time
+    protected
 
-      raise e
-    end
+      def stall_time
+        1.hour
+      end
+
+      def timeout_stalled_jobs(&)
+        start_time = Time.current
+        Timeout.timeout(stall_time, &)
+      rescue Timeout::Error => e
+        raise StalledJobError, e.message if Time.current - start_time >= stall_time
+
+        raise e
+      end
   end
 end

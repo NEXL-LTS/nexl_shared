@@ -11,9 +11,9 @@ class StallingJob < ActiveJob::Base # rubocop:disable Rails/ApplicationJob
 
   protected
 
-  def stall_time
-    2.seconds
-  end
+    def stall_time
+      2.seconds
+    end
 end
 
 class NonStallingJob < ActiveJob::Base # rubocop:disable Rails/ApplicationJob
@@ -25,9 +25,9 @@ class NonStallingJob < ActiveJob::Base # rubocop:disable Rails/ApplicationJob
 
   protected
 
-  def stall_time
-    2.seconds
-  end
+    def stall_time
+      2.seconds
+    end
 end
 
 class TimeOutJob < ActiveJob::Base # rubocop:disable Rails/ApplicationJob
@@ -41,9 +41,9 @@ class TimeOutJob < ActiveJob::Base # rubocop:disable Rails/ApplicationJob
 
   protected
 
-  def stall_time
-    6.seconds
-  end
+    def stall_time
+      6.seconds
+    end
 end
 
 module NexlShared
