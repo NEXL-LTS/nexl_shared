@@ -5,7 +5,7 @@ require:
 
 AllCops:
   NewCops: enable
-  TargetRubyVersion: 2.7
+  TargetRubyVersion: 3.1
   Exclude:
   - 'bin/*'
   - 'vendor/bundle/**/*'
@@ -45,7 +45,7 @@ Layout/EmptyLinesAroundAttributeAccessor:
 
 Layout/LineLength:
   Max: 99
-  IgnoredPatterns: ['\A#']
+  AllowedPatterns: ['\A#']
 
 Metrics/CyclomaticComplexity:
   Max: 8

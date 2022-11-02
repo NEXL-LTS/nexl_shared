@@ -2,9 +2,12 @@ require "bundler/setup"
 
 if ENV['COVERAGE']
   require 'simplecov'
-  SimpleCov.minimum_coverage_by_file 75
-  SimpleCov.minimum_coverage 88
-  SimpleCov.start
+  SimpleCov.start do
+    enable_coverage :branch
+
+    minimum_coverage_by_file branch: 40
+    minimum_coverage line: 87
+  end
 end
 
 require "nexl_shared"

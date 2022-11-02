@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 module NexlShared
   RSpec.describe ErrorTracker, type: :model do
     describe ".error" do

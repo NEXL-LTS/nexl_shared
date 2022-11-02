@@ -30,5 +30,11 @@ RSpec/SubjectStub:
 RSpec/EmptyExampleGroup:
   Enabled: false
 
+RSpec/ExampleWording:
+  Enabled: false
+
+RSpec/NoExpectationExample:
+  Enabled: false
+
 Rails/SkipsModelValidations:
   Enabled: false

@@ -1,4 +1,3 @@
-require 'spec_helper'
 require 'action_controller'
 require 'action_controller/metal/exceptions'
 require 'action_controller/metal/request_forgery_protection'

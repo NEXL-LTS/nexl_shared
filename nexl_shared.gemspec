@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.summary       = "Shared code between different NEXL rails engines and projects"
   spec.description   = "Shared code between different NEXL rails engines and projects"
   spec.homepage      = "https://bitbucket.org/nexl-lts/nexl/src/master/local_gems/nexl_shared"
-  spec.required_ruby_version = Gem::Requirement.new(">= 2.7.0")
+  spec.required_ruby_version = Gem::Requirement.new(">= 3.1.0")
 
   spec.metadata["homepage_uri"] = spec.homepage
 
@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency 'actionpack', '>= 6.0', '< 8.0'
+  spec.add_dependency 'activejob', '>= 6.0', '< 8.0'
   spec.add_dependency 'activerecord', '>= 6.0', '< 8.0'
   spec.add_dependency 'activesupport', '>= 6.0', '< 8.0'
   spec.add_dependency 'graphql', '>= 1.9.4'
