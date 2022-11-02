@@ -24,7 +24,8 @@ module NexlShared
 
       def error(args)
         ignore_errors = ["ActiveStorage::FileNotFoundError",
-                         "ActiveRecord::Deadlocked"]
+                         "ActiveRecord::Deadlocked",
+                         "RocketReach::Error"]
         return if ignore_errors.include?(args.first.class.to_s)
 
         @error = args if @error.blank?
