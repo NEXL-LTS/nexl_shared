@@ -52,6 +52,11 @@ module NexlShared
       FirstError.error(args)
     end
 
+    def self.critical(*args)
+      Rollbar.critical(*args)
+      FirstError.error(args)
+    end
+
     def self.warn(*args)
       Rollbar.warn(*args) if ENV['CYPRESS'].blank?
     end
