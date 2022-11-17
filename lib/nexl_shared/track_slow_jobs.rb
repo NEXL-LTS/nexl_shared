@@ -19,7 +19,7 @@ module NexlShared
 
         return if time_taken < slow_time.seconds
 
-        tracker.warn("Slow #{job_name}", time_taken: time_taken, arguments: arguments)
+        tracker.warn("Slow #{job_name}", time_taken: time_taken, arguments: arguments.inspect)
       end
     end
 
