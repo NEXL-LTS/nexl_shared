@@ -23,7 +23,8 @@ module NexlShared
         queue_latency = queue.latency.seconds
         return if queue_latency < 3.hours
 
-        txt = "Sidekiq #{queue.name} has latency of #{time_ago_in_words(queue_latency.ago)}"
+        latency = time_ago_in_words(queue_latency.ago)
+        txt = "#{ENV['DEFAULT_HOST']} #{queue.name} has latency of #{latency}"
         error_tracker.critical(txt, queue_latency: queue_latency)
       end
   end
