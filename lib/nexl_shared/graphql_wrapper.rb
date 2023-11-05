@@ -35,13 +35,14 @@ module NexlShared
       self.re_raise_errors = re_raise_errors
     end
 
-    def track_errors(res, schema_args)
+    def track_errors(res, schema_args, re_raise_errors)
       Array.wrap(res.dig("errors")).each do |error|
         message = error.dig("message") || error.to_s
         begin
           raise select_error_class(message), message
         rescue ResultError => e
           error_tracker.error(e, schema_args)
+          raise e if re_raise_errors
         end
       end
     end
@@ -86,7 +87,7 @@ module NexlShared
 
     def execute(**schema_args)
       execute!(**schema_args).tap do |res|
-        track_errors(res, schema_args) if res['errors']
+        track_errors(res, schema_args, re_raise_errors) if res['errors']
       end
     rescue => e
       error_tracker.error(e, **schema_args)

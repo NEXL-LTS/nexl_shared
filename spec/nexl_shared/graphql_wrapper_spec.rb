@@ -2,7 +2,7 @@ module NexlShared
   RSpec.describe GraphqlWrapper do
     subject do
       described_class.new(app_schema, logger: logger, error_tracker: error_tracker,
-                                      re_raise_errors: true)
+                                      re_raise_errors: false)
     end
 
     let(:app_schema) { class_double(GraphQL::Schema, execute: {}) }
