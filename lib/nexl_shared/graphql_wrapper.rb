@@ -41,7 +41,7 @@ module NexlShared
         begin
           raise select_error_class(message), message
         rescue ResultError => e
-          error_tracker.error(e, schema_args)
+          error_tracker&.error(e, schema_args)
           raise e if re_raise_errors
         end
       end
@@ -90,7 +90,7 @@ module NexlShared
         track_errors(res, schema_args, re_raise_errors) if res['errors']
       end
     rescue => e
-      error_tracker.error(e, **schema_args)
+      error_tracker&.error(e, **schema_args)
       logger&.error(e)
       raise e if re_raise_errors
 
