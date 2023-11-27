@@ -15,7 +15,7 @@ module NexlShared
     protected
 
       def stall_time
-        1.hour
+        2.hours
       end
 
       def timeout_stalled_jobs(&)
