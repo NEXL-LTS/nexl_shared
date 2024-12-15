@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'graphql', '>= 1.9.4', '< 3.0'
   spec.add_dependency 'rack-timeout', '>= 0.6.0'
-  spec.add_dependency 'rails', '>= 6.0', '< 8.0'
+  spec.add_dependency 'rails', '>= 6.0', '< 9.0'
   spec.add_dependency 'rollbar', '>= 2.18.2'
   spec.metadata = {
     'rubygems_mfa_required' => 'true'
