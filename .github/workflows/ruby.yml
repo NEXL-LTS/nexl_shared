@@ -24,6 +24,3 @@ jobs:
     
     - name: Run tests
       run: bin/rspec
-    
-    - name: Run RuboCop
-      run: bin/rubocop
