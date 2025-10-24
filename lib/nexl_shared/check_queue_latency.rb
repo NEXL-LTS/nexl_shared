@@ -38,7 +38,8 @@ module NexlShared
         return if unit.nil? || !amount.respond_to?(unit)
 
         queue_latency = queue.latency.seconds
-        return if queue_latency <= amount.public_send(unit)
+        threshold = amount.public_send(unit) * 1.5
+        return if queue_latency < threshold
 
         track_error(error_tracker, queue_latency, queue.name)
       end

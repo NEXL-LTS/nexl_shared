@@ -17,13 +17,13 @@ module NexlShared
         let(:queue_name) { 'within_a_minute' }
 
         context 'when latency is too high' do
-          let(:queue_latency) { 2.minutes.to_i }
+          let(:queue_latency) { 90.seconds.to_i }
 
           it { expect(error_tracker).to have_received(:critical) }
         end
 
         context 'when latency is acceptable' do
-          let(:queue_latency) { 1.minute.to_i }
+          let(:queue_latency) { 89.seconds.to_i }
 
           it { expect(error_tracker).not_to have_received(:critical) }
         end
@@ -33,13 +33,13 @@ module NexlShared
         let(:queue_name) { 'within_5_minutes' }
 
         context 'when latency is too high' do
-          let(:queue_latency) { 6.minutes.to_i }
+          let(:queue_latency) { 450.seconds.to_i }
 
           it { expect(error_tracker).to have_received(:critical) }
         end
 
         context 'when latency is acceptable' do
-          let(:queue_latency) { 5.minutes.to_i }
+          let(:queue_latency) { 449.seconds.to_i }
 
           it { expect(error_tracker).not_to have_received(:critical) }
         end
@@ -49,13 +49,13 @@ module NexlShared
         let(:queue_name) { 'within_a_hour' }
 
         context 'when latency is too high' do
-          let(:queue_latency) { 61.minutes.to_i }
+          let(:queue_latency) { 90.minutes.to_i }
 
           it { expect(error_tracker).to have_received(:critical) }
         end
 
         context 'when latency is acceptable' do
-          let(:queue_latency) { 1.hour.to_i }
+          let(:queue_latency) { 89.minutes.to_i }
 
           it { expect(error_tracker).not_to have_received(:critical) }
         end
