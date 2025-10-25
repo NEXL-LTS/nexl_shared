@@ -3,7 +3,14 @@ require "nexl_shared/version"
 
 module NexlShared
   class Error < StandardError; end
-  # Your code goes here...
+
+  class << self
+    attr_accessor :queue_latency_error_threshold
+
+    def queue_latency_error_threshold
+      @queue_latency_error_threshold ||= 1.5
+    end
+  end
 end
 
 require 'nexl_shared/error_tracker'
